@@ -53,21 +53,21 @@
                            Foreground="#64748B"
                            FontSize="15"/>
 
-                <TextBlock Text="Поле для логина" Margin="0,0,0,6" Foreground="#334155" FontWeight="SemiBold"/>
+                <TextBlock Text="Логин" Margin="0,0,0,6" Foreground="#334155" FontWeight="SemiBold"/>
                 <TextBox x:Name="LoginBox"
                          Text="Введите логин"
                          Foreground="Gray"
                          GotFocus="LoginBox_GotFocus"
                          LostFocus="LoginBox_LostFocus"/>
 
-                <TextBlock Text="Поле для пароля" Margin="0,4,0,6" Foreground="#334155" FontWeight="SemiBold"/>
+                <TextBlock Text="Пароль" Margin="0,4,0,6" Foreground="#334155" FontWeight="SemiBold"/>
                 <Grid Margin="0,0,0,12">
                     <PasswordBox x:Name="PsbPass"
                                  PasswordChanged="PsbPass_PasswordChanged"
                                  KeyDown="PsbPass_KeyDown"/>
                     <TextBlock x:Name="PasswordPlaceholder"
                                Text="Введите пароль"
-                               Margin="12,0,0,0"
+                               Margin="12,-10,0,0"
                                VerticalAlignment="Center"
                                Foreground="Gray"
                                IsHitTestVisible="False"/>
