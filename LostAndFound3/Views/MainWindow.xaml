@@ -49,6 +49,7 @@
             <TextBox Width="200" Margin="5" Style="{StaticResource WatermarkTextBox}" Tag="Описание" Text="{Binding Description}"/>
 
             <Button Content="Добавить" Margin="5" Command="{Binding AddCommand}"/>
+            <Button Content="Редактировать" Margin="5" Command="{Binding EditCommand}"/>
             <Button Content="Удалить" Margin="5" Command="{Binding DeleteCommand}"/>
             <Button Content="Обновить" Margin="5" Command="{Binding UpdateCommand}"/>
         </StackPanel>

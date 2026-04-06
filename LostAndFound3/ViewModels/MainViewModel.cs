@@ -102,7 +102,28 @@ namespace LostAndFound.ViewModels
             Load();
         }
 
-        
+        [RelayCommand]
+        public void Edit()
+        {
+            if (SelectedItem == null)
+                return;
+
+            using var conn = new SqlConnection(connectionString);
+            conn.Open();
+
+            var cmd = new SqlCommand(
+                "UPDATE Items SET Name=@n, Description=@d WHERE Id=@id",
+                conn);
+
+            cmd.Parameters.AddWithValue("@id", SelectedItem.Id);
+            cmd.Parameters.AddWithValue("@n", SelectedItem.Name ?? "");
+            cmd.Parameters.AddWithValue("@d", SelectedItem.Description ?? "");
+
+            cmd.ExecuteNonQuery();
+
+            Load();
+        }
+
         [RelayCommand]
         public void Update()
         {

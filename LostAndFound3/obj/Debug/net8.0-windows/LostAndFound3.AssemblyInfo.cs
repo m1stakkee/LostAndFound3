@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LostAndFound3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7687d4efd87b9b84a423552985530a8e29d305f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("LostAndFound3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LostAndFound3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
