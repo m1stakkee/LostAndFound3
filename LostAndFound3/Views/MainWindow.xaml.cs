@@ -1,7 +1,7 @@
 ﻿using LostAndFound.ViewModels;
 using System.Windows;
 
-namespace LostAndFound.Views
+namespace LostAndFound3.Views
 {
     public partial class MainWindow : Window
     {

@@ -71,3 +71,6 @@ C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\obj\Debug\net8.0-windows
 C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\bin\Debug\net8.0-windows\Konscious.Security.Cryptography.Argon2.dll
 C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\bin\Debug\net8.0-windows\Konscious.Security.Cryptography.Blake2.dll
 C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\obj\Debug\net8.0-windows\LostAndFound3.sourcelink.json
+C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\obj\Debug\net8.0-windows\Views\GiveItemWindow.baml
+C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\obj\Debug\net8.0-windows\Views\GiveItemWindow.g.cs
+C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\obj\Debug\net8.0-windows\LostAndFound3_MarkupCompile.lref

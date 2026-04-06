@@ -1,16 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LostAndFound.Models;
-using System.Collections.ObjectModel;
 using Microsoft.Data.SqlClient;
-using System.Linq;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace LostAndFound.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
         private string connectionString =
-    "Server=IVAN\\SQLEXPRESS;Database=LostAndFoundDB;Trusted_Connection=True;TrustServerCertificate=True;Connect Timeout=2;";
+            "Server=IVAN\\SQLEXPRESS;Database=LostAndFoundDB;Trusted_Connection=True;TrustServerCertificate=True;Connect Timeout=2;";
 
         [ObservableProperty]
         private ObservableCollection<Item> items = new();
@@ -34,14 +34,33 @@ namespace LostAndFound.ViewModels
 
         
         [RelayCommand]
-        public void Load()
+        public void Load(string search = "")
         {
             Items.Clear();
 
             using var conn = new SqlConnection(connectionString);
             conn.Open();
 
-            var cmd = new SqlCommand("SELECT * FROM Items", conn);
+            var cmd = new SqlCommand(@"
+                SELECT 
+                    i.Id, 
+                    i.Name, 
+                    i.Description, 
+                    i.Status,
+                    o.FullName,
+                    o.Phone,
+                    o.Email
+                FROM Items i
+                LEFT JOIN Owners o ON i.OwnerId = o.Id
+                WHERE 
+                    (@search = '') OR
+                    i.Name LIKE '%' + @search + '%' OR
+                    ISNULL(o.FullName, '') LIKE '%' + @search + '%' OR
+                    ISNULL(o.Phone, '') LIKE '%' + @search + '%'
+            ", conn);
+
+            cmd.Parameters.AddWithValue("@search", string.IsNullOrWhiteSpace(search) ? "" : search);
+
             var reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -51,12 +70,28 @@ namespace LostAndFound.ViewModels
                     Id = (int)reader["Id"],
                     Name = reader["Name"].ToString(),
                     Description = reader["Description"].ToString(),
-                    Status = reader["Status"].ToString()
+                    Status = reader["Status"].ToString(),
+
+                    OwnerName = reader["FullName"] == DBNull.Value ? "—" : reader["FullName"].ToString(),
+                    OwnerPhone = reader["Phone"] == DBNull.Value ? "—" : FormatPhone(reader["Phone"].ToString()),
+                    OwnerEmail = reader["Email"] == DBNull.Value ? "—" : reader["Email"].ToString()
                 });
             }
         }
 
-       
+        
+        private string FormatPhone(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return "—";
+
+            if (phone.Length == 11)
+                return $"+7 ({phone.Substring(1, 3)}) {phone.Substring(4, 3)}-{phone.Substring(7, 2)}-{phone.Substring(9, 2)}";
+
+            return phone;
+        }
+
+        
         [RelayCommand]
         public void Add()
         {
@@ -81,7 +116,6 @@ namespace LostAndFound.ViewModels
             Load();
         }
 
-       
         [RelayCommand]
         public void Delete()
         {
@@ -96,28 +130,6 @@ namespace LostAndFound.ViewModels
                 conn);
 
             cmd.Parameters.AddWithValue("@id", SelectedItem.Id);
-
-            cmd.ExecuteNonQuery();
-
-            Load();
-        }
-
-        [RelayCommand]
-        public void Edit()
-        {
-            if (SelectedItem == null)
-                return;
-
-            using var conn = new SqlConnection(connectionString);
-            conn.Open();
-
-            var cmd = new SqlCommand(
-                "UPDATE Items SET Name=@n, Description=@d WHERE Id=@id",
-                conn);
-
-            cmd.Parameters.AddWithValue("@id", SelectedItem.Id);
-            cmd.Parameters.AddWithValue("@n", SelectedItem.Name ?? "");
-            cmd.Parameters.AddWithValue("@d", SelectedItem.Description ?? "");
 
             cmd.ExecuteNonQuery();
 
@@ -146,46 +158,35 @@ namespace LostAndFound.ViewModels
             Load();
         }
 
-       
+        
+        [RelayCommand]
+        public void GiveItem()
+        {
+            if (SelectedItem == null)
+            {
+                MessageBox.Show("Выберите вещь!");
+                return;
+            }
+
+            var window = new Views.GiveItemWindow(SelectedItem.Id);
+
+            if (window.ShowDialog() == true)
+            {
+                Load();
+            }
+        }
+
+        
+        [RelayCommand]
+        public void Search()
+        {
+            Load(SearchText);
+        }
+
+        
         partial void OnSearchTextChanged(string value)
         {
-            using var conn = new SqlConnection(connectionString);
-            conn.Open();
-
-            string query;
-
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                query = "SELECT * FROM Items";
-            }
-            else
-            {
-                query = @"
-            SELECT * FROM Items
-            WHERE 
-                Name LIKE @search OR
-                Description LIKE @search";
-            }
-
-            var cmd = new SqlCommand(query, conn);
-
-            if (!string.IsNullOrWhiteSpace(value))
-                cmd.Parameters.AddWithValue("@search", "%" + value + "%");
-
-            var reader = cmd.ExecuteReader();
-
-            Items.Clear();
-
-            while (reader.Read())
-            {
-                Items.Add(new Item
-                {
-                    Id = (int)reader["Id"],
-                    Name = reader["Name"].ToString(),
-                    Description = reader["Description"].ToString(),
-                    Status = reader["Status"].ToString()
-                });
-            }
+            Load(value);
         }
     }
 }
