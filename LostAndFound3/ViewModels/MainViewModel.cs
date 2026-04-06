@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LostAndFound.Models;
 using Microsoft.Data.SqlClient;
@@ -32,7 +32,6 @@ namespace LostAndFound.ViewModels
             Load();
         }
 
-        
         [RelayCommand]
         public void Load(string search = "")
         {
@@ -47,6 +46,7 @@ namespace LostAndFound.ViewModels
                     i.Name, 
                     i.Description, 
                     i.Status,
+                    i.OwnerId,
                     o.FullName,
                     o.Phone,
                     o.Email
@@ -71,7 +71,7 @@ namespace LostAndFound.ViewModels
                     Name = reader["Name"].ToString(),
                     Description = reader["Description"].ToString(),
                     Status = reader["Status"].ToString(),
-
+                    OwnerId = reader["OwnerId"] == DBNull.Value ? null : (int?)reader["OwnerId"],
                     OwnerName = reader["FullName"] == DBNull.Value ? "—" : reader["FullName"].ToString(),
                     OwnerPhone = reader["Phone"] == DBNull.Value ? "—" : FormatPhone(reader["Phone"].ToString()),
                     OwnerEmail = reader["Email"] == DBNull.Value ? "—" : reader["Email"].ToString()
@@ -79,7 +79,6 @@ namespace LostAndFound.ViewModels
             }
         }
 
-        
         private string FormatPhone(string phone)
         {
             if (string.IsNullOrWhiteSpace(phone))
@@ -91,7 +90,6 @@ namespace LostAndFound.ViewModels
             return phone;
         }
 
-        
         [RelayCommand]
         public void Add()
         {
@@ -158,7 +156,6 @@ namespace LostAndFound.ViewModels
             Load();
         }
 
-        
         [RelayCommand]
         public void GiveItem()
         {
@@ -168,22 +165,16 @@ namespace LostAndFound.ViewModels
                 return;
             }
 
-            var window = new Views.GiveItemWindow(SelectedItem.Id);
-
-            if (window.ShowDialog() == true)
-            {
-                Load();
-            }
+            LostAndFound3.Views.MainWindow.MainFrameStatic.Navigate(
+                new LostAndFound3.Views.GiveItemPage(SelectedItem.Id));
         }
 
-        
         [RelayCommand]
         public void Search()
         {
             Load(SearchText);
         }
 
-        
         partial void OnSearchTextChanged(string value)
         {
             Load(value);
