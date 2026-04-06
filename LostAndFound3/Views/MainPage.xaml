@@ -73,6 +73,7 @@
         <DockPanel Grid.Row="0" LastChildFill="True">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <Button Content="← Назад" Style="{StaticResource SecondaryButtonStyle}" Width="110" Click="Back_Click"/>
+                <Button Content="Профиль" Style="{StaticResource SecondaryButtonStyle}" Width="120" Click="OpenProfile_Click"/>
                 <Button Content="Заявки" Style="{StaticResource SecondaryButtonStyle}" Width="120" Click="OpenRequests_Click"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" Width="300">

@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LostAndFound.Views
+namespace LostAndFound3.Views
 {
     public partial class LoginWindow : Window
     {

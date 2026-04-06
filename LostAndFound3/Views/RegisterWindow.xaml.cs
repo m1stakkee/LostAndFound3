@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using Microsoft.Data.SqlClient;
+using LostAndFound3.Helpers;
+using LostAndFound.ViewModels;
 
-namespace LostAndFound.Views
+namespace LostAndFound3.Views
 {
     public partial class RegisterWindow : Window
     {

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\ivank\source\repos\LostAndFound3\LostAndFound3\App.xaml
-111920779535
+12-761985429
 
-22915604378
+23-1467660908
 215698948453
-Views\CreateRequestPage.xaml;Views\GiveItemPage.xaml;Views\LoginPage.xaml;Views\LoginWindow.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\RegisterPage.xaml;Views\RegisterWindow.xaml;Views\RequestsPage.xaml;Views\UserPage.xaml;Views\UserWindow.xaml;
+Views\CreateRequestPage.xaml;Views\EditProfilePage.xaml;Views\GiveItemPage.xaml;Views\LoginPage.xaml;Views\LoginWindow.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\RegisterPage.xaml;Views\RegisterWindow.xaml;Views\RequestsPage.xaml;Views\UserPage.xaml;Views\UserWindow.xaml;
 
 False
 

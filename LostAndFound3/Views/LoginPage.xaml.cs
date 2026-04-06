@@ -1,5 +1,5 @@
-using LostAndFound.Helpers;
-using LostAndFound3.Views;
+using LostAndFound;
+using LostAndFound3.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Windows;
@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace LostAndFound.Views
+namespace LostAndFound3.Views
 {
     public partial class LoginPage : Page
     {
@@ -73,7 +73,7 @@ namespace LostAndFound.Views
                 conn.Open();
 
                 var cmd = new SqlCommand(
-                    "SELECT PasswordHash, Role FROM Users WHERE Login=@login",
+                    "SELECT Id, PasswordHash, Role FROM Users WHERE Login=@login",
                     conn);
 
                 cmd.Parameters.AddWithValue("@login", login);
@@ -82,13 +82,15 @@ namespace LostAndFound.Views
 
                 if (reader.Read())
                 {
+                    int userId = (int)reader["Id"];
                     string dbHash = reader["PasswordHash"].ToString();
                     string role = reader["Role"].ToString();
 
                     if (_passwordHasher.VerifyPassword(password, dbHash))
                     {
+                        SessionManager.CurrentUserId = userId;
                         SessionManager.CurrentLogin = login;
-                        SessionManager.CurrentRole = role;
+                        SessionManager.CurrentUserRole = role;
 
                         if (role == "Admin")
                             new MainWindow().Show();

@@ -1,10 +1,10 @@
-using LostAndFound.Helpers;
+using LostAndFound3.Helpers;
 using Microsoft.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace LostAndFound.Views
+namespace LostAndFound3.Views
 {
     public partial class CreateRequestPage : Page
     {

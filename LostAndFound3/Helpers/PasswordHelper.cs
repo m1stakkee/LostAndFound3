@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LostAndFound 
+namespace LostAndFound3.Views
 {
     public class PasswordHelper 
     {

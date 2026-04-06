@@ -19,9 +19,14 @@ namespace LostAndFound3.Views
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            var loginWindow = new LostAndFound.Views.LoginWindow();
+            var loginWindow = new LoginWindow();
             loginWindow.Show();
             Window.GetWindow(this)?.Close();
+        }
+
+        private void OpenProfile_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MainFrameStatic.Navigate(new EditProfilePage());
         }
     }
 }

@@ -1,11 +1,12 @@
-using LostAndFound.Helpers;
+using LostAndFound3.Helpers;
 using LostAndFound.ViewModels;
 using Microsoft.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using LostAndFound3.Views;
 
-namespace LostAndFound.Views
+namespace LostAndFound3.Views
 {
     public partial class UserPage : Page
     {
@@ -24,6 +25,11 @@ namespace LostAndFound.Views
         {
             new LoginWindow().Show();
             Window.GetWindow(this)?.Close();
+        }
+
+        private void OpenProfile_Click(object sender, RoutedEventArgs e)
+        {
+            UserWindow.UserFrameStatic.Navigate(new EditProfilePage());
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
@@ -72,7 +78,7 @@ namespace LostAndFound.Views
             return result == null ? null : (int?)result;
         }
 
-        private void RequestSelectedItem_Click(object sender, RoutedEventArgs e)
+        private void CreateRequestForSelectedItem_Click(object sender, RoutedEventArgs e)
         {
             if (vm.SelectedItem == null)
             {
@@ -108,7 +114,7 @@ namespace LostAndFound.Views
             MessageBox.Show("Заявка на выбранную вещь отправлена.");
         }
 
-        private void CreateRequest_Click(object sender, RoutedEventArgs e)
+        private void OpenCreateRequest_Click(object sender, RoutedEventArgs e)
         {
             UserWindow.UserFrameStatic.Navigate(new CreateRequestPage());
         }

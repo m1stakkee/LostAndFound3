@@ -60,7 +60,7 @@ namespace LostAndFound3.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/LostAndFound3;component/views/requestspage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/LostAndFound3;V1.0.0.0;component/views/requestspage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\RequestsPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
