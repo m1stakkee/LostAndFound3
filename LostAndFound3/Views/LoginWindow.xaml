@@ -7,7 +7,10 @@
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200">
 
-            
+            <Frame x:Name="LoginFrame" 
+                   NavigationUIVisibility="Hidden">
+                
+            </Frame>
             <TextBox x:Name="LoginBox"
                      Height="30"
                      Margin="0,5"

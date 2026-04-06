@@ -6,7 +6,7 @@
     <Grid>
         <StackPanel>
 
-            <!-- 🔍 ПОИСК -->
+            
             <TextBox x:Name="SearchBox"
                      Height="30"
                      Margin="10"
@@ -15,8 +15,7 @@
                      GotFocus="SearchBox_GotFocus"
                      LostFocus="SearchBox_LostFocus"
                      TextChanged="SearchBox_TextChanged"/>
-
-            <!-- 📊 DATA GRID -->
+            
             <DataGrid ItemsSource="{Binding Items}"
                       SelectedItem="{Binding SelectedItem}"
                       AutoGenerateColumns="False"

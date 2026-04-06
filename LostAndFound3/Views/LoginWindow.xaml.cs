@@ -10,17 +10,27 @@ namespace LostAndFound.Views
 {
     public partial class LoginWindow : Window
     {
+
+        
+            
+
+            public LoginWindow()
+            {
+                InitializeComponent();
+
+                
+            }
+        
+
         private PasswordHelper _passwordHasher = new PasswordHelper();
 
         private string connectionString =
             "Server=IVAN\\SQLEXPRESS;Database=LostAndFoundDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
-        public LoginWindow()
-        {
-            InitializeComponent();
-        }
+        
 
         
+
         private void LoginBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (LoginBox.Text == "Введите логин")
